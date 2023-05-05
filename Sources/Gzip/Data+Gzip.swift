@@ -111,7 +111,7 @@ public struct GzipError: Swift.Error, Sendable {
     public let message: String
     
     
-    internal init(code: Int32, msg: UnsafePointer<CChar>?) {
+    public init(code: Int32, msg: UnsafePointer<CChar>?) {
         
         self.message = msg.flatMap(String.init(validatingUTF8:)) ?? "Unknown gzip error"
         self.kind = Kind(code: code)
@@ -315,8 +315,8 @@ extension Data {
 }
 
 
-private enum DataSize {
+public enum DataSize {
     
-    static let chunk = 1 << 14
-    static let stream = MemoryLayout<z_stream>.size
+    public static let chunk = 1 << 14
+    public static let stream = MemoryLayout<z_stream>.size
 }
